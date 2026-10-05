@@ -31,13 +31,14 @@ if ($licenseWarning) {
 }
 
 Write-Host "[INFO] Starting to run all GroupDocs.Conversion.LowCode examples..." -ForegroundColor Green
-Write-Host "[INFO] This will execute 70+ examples demonstrating various conversion features." -ForegroundColor White
+Write-Host "[INFO] This will run 67 examples and skip 2 that need a license put into Program.fs." -ForegroundColor White
 Write-Host "[INFO] Each example will be built and run individually." -ForegroundColor White
 Write-Host ""
 
 $projectCount = 0
 $successCount = 0
 $failedCount = 0
+$skippedCount = 0
 
 Write-Host "========================================" -ForegroundColor Cyan
 Write-Host "Running Examples..." -ForegroundColor Cyan
@@ -47,13 +48,21 @@ Get-ChildItem -Path .\Examples -Recurse -Filter "*.fsproj" | ForEach-Object {
     $projectCount++
     $projectDir = $_.Directory.FullName
     $projectName = $_.Directory.Name
-    
+
     Write-Host ""
     Write-Host "[$projectCount] Running: $projectName" -ForegroundColor Yellow
     Write-Host "   Directory: $projectDir" -ForegroundColor Gray
-    
+
+    # Skip examples that read a license file or keys from the code
+    $code = Get-Content -Raw -LiteralPath (Join-Path $projectDir "Program.fs")
+    if ($code -and $code.Contains("License.Set") -and -not $code.Contains("GD_PUBLIC_KEY")) {
+        Write-Host "   [SKIPPED] Needs your license in Program.fs; add it and run this example with dotnet run" -ForegroundColor DarkYellow
+        $skippedCount++
+        return
+    }
+
     Push-Location $projectDir
-    
+
     # Try to build first
     Write-Host "   Building project..." -ForegroundColor Gray
     $buildResult = dotnet build --verbosity quiet 2>&1
@@ -62,11 +71,11 @@ Get-ChildItem -Path .\Examples -Recurse -Filter "*.fsproj" | ForEach-Object {
         $failedCount++
     } else {
         Write-Host "   Building successful, running example..." -ForegroundColor Gray
-        
+
         # Capture output and check for unhandled exceptions
         $runResult = dotnet run --verbosity quiet 2>&1
         $runExitCode = $LASTEXITCODE
-        
+
         # Check if output contains "Unhandled exception"
         if ($runResult -match "Unhandled exception") {
             Write-Host "   [ERROR] Unhandled exception detected in: $projectName" -ForegroundColor Red
@@ -83,7 +92,7 @@ Get-ChildItem -Path .\Examples -Recurse -Filter "*.fsproj" | ForEach-Object {
             $successCount++
         }
     }
-    
+
     Pop-Location
 }
 
@@ -93,11 +102,16 @@ Write-Host "Summary" -ForegroundColor Cyan
 Write-Host "========================================" -ForegroundColor Cyan
 Write-Host "Total projects found: $projectCount" -ForegroundColor White
 Write-Host "Successful runs: $successCount" -ForegroundColor Green
-Write-Host "Failed runs: $failedCount" -ForegroundColor ${if ($failedCount -gt 0)  { "Red" } else { "Green" } }
+Write-Host "Failed runs: $failedCount" -ForegroundColor $(if ($failedCount -gt 0) { "Red" } else { "Green" })
+Write-Host "Skipped: $skippedCount" -ForegroundColor White
 
 if ($failedCount -gt 0) {
     Write-Host ""
-    Write-Host "[TIP] Check individual example README.md files for specific requirements." -ForegroundColor Cyan
+    Write-Host "[NOTE] Some examples failed. This might be due to:" -ForegroundColor Yellow
+    Write-Host "       - Missing license keys" -ForegroundColor White
+    Write-Host "       - Missing sample files" -ForegroundColor White
+    Write-Host "       - .NET version compatibility" -ForegroundColor White
+    Write-Host "       - File access permissions" -ForegroundColor White
 }
 
 Write-Host ""

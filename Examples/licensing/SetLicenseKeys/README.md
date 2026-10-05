@@ -1,53 +1,36 @@
-﻿# Set License Keys
+# Set License Keys
 
-This example demonstrates how to set groupdocs license keys programmatically using GroupDocs.Conversion.LowCode.
+As an alternative option you can set the license keys that you can find within your license file.
+The following sample demonstrates how to set license keys.
 
-## Overview
+## Code Example
 
-This console application shows how to set groupdocs license keys programmatically.
+```fsharp
+open GroupDocs.Conversion.LowCode
 
-## Purpose
+[<EntryPoint>]
+let main argv =
+    // The public and private keys from your license.
+    let publicKey = "..."
+    let privateKey = "..."
 
-This example demonstrates the **set license keys workflow**:
-- Set GroupDocs license keys programmatically
-- Basic file input/output handling
-- Straightforward conversion process
+    // Set license keys
+    License.Set(publicKey, privateKey)
 
-## Files
+    0 // Return exit code
+```
 
-### Input Files
-- No input files required
+## How to Run
 
-### Output Files
-- No output files generated
-
-## Running the Example
-
-1. Ensure you have .NET 6.0 or later installed
-2. Set your GroupDocs license keys as environment variables:
-   - `GD_PUBLIC_KEY`
-   - `GD_PRIVATE_KEY`
-3. Navigate to this directory
-4. Run the example:
+1. Install the .NET SDK for `net10.0`.
+2. Edit `Program.fs` so that it uses your license: the path to your license file, or your public and private keys.
+3. Open this directory and run the example:
    ```bash
    dotnet run
    ```
 
-## Code Overview
+## Learn More
 
-The conversion logic in Program.fs demonstrates:
-- License setup from environment variables
-- Set GroupDocs license keys programmatically
-- Basic conversion workflow
-- File output
-
-## Requirements
-
-- .NET 6.0 or later
-- GroupDocs.Conversion.LowCode package
-- Valid GroupDocs license keys (Optional)
-
-## Related Documentation
-
-For more information about document conversion, see the [GroupDocs.Conversion.LowCode documentation](https://docs.groupdocs.net/conversion/developer-guide/).
-
+- [Licensing](https://docs.groupdocs.net/conversion/licensing/) in the GroupDocs.Conversion.LowCode documentation
+- [GroupDocs.Conversion.LowCode](https://www.nuget.org/packages/GroupDocs.Conversion.LowCode) on NuGet
+- [Get a temporary license](https://purchase.groupdocs.net/temporary-license/)

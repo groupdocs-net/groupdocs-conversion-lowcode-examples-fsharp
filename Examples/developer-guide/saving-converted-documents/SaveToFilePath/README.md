@@ -1,53 +1,46 @@
-﻿# Save to FilePath
+# Example 1: Save to File Path
 
-This example demonstrates how to save converted documents to a file path using GroupDocs.Conversion.LowCode.
+The following example shows how to save a converted PDF file to the `business-plan.pdf` file by specifying the relative file path.  
+The file is going to be saved in the current directory.
 
-## Overview
+## Code Example
 
-This console application shows how to save converted documents by specifying the output file path.
+```fsharp
+open System
+open GroupDocs.Conversion.LowCode
 
-## Purpose
+[<EntryPoint>]
+let main _ =
+    // Load license keys
+    let publicKey = Environment.GetEnvironmentVariable("GD_PUBLIC_KEY")
+    let privateKey = Environment.GetEnvironmentVariable("GD_PRIVATE_KEY")
 
-This example demonstrates the **file path saving method**:
-- Saving converted documents using a file path string
-- Simple and straightforward approach
-- Suitable for local file storage
-- Basic DOCX to PDF conversion workflow
+    // Apply the license
+    License.Set(publicKey, privateKey)
 
-## Files
+    // Create a converter from file path
+    let converter = new DocxToPdfConverter("business-plan.docx")
 
-### Input Files
-- `business-plan.docx` - Source document for conversion
+    // Convert DOCX to PDF
+    converter.Convert("business-plan.pdf")
+    0
+```
 
-### Output Files
-- `business-plan.pdf` - Converted output document
+## How to Run
 
-## Running the Example
-
-1. Ensure you have .NET 6.0 or later installed
-2. Set your GroupDocs license keys as environment variables:
-   - `GD_PUBLIC_KEY`
-   - `GD_PRIVATE_KEY`
-3. Navigate to this directory
-4. Run the example:
+1. Install the .NET SDK for `net10.0`.
+2. Set the `GD_PUBLIC_KEY` and `GD_PRIVATE_KEY` environment variables to your license keys.
+3. Open this directory and run the example:
    ```bash
    dotnet run
    ```
 
-## Code Overview
+## Input Files
 
-The saving logic in `Program.fs` demonstrates:
-- License setup from environment variables
-- Document loading using file path: `new DocxToPdfConverter("business-plan.docx")`
-- Saving to file path: `converter.Convert("business-plan.pdf")`
-- Basic conversion workflow
+- `business-plan.docx`
 
-## Requirements
+## Learn More
 
-- .NET 6.0 or later
-- GroupDocs.Conversion.LowCode package
-- Valid GroupDocs license keys (Optional)
-
-## Related Documentation
-
-For more information about saving converted documents, see the [GroupDocs.Conversion.LowCode documentation](https://docs.groupdocs.net/conversion/developer-guide/saving-converted-documents/). 
+- [Saving Converted Documents](https://docs.groupdocs.net/conversion/developer-guide/saving-converted-documents/) in the GroupDocs.Conversion.LowCode documentation
+- [GroupDocs.Conversion.LowCode](https://www.nuget.org/packages/GroupDocs.Conversion.LowCode) on NuGet
+- [Get a temporary license](https://purchase.groupdocs.net/temporary-license/)

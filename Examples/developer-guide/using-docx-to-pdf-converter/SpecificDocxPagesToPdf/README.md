@@ -1,53 +1,53 @@
-﻿# Specific DOCX Pages to PDF
+# Convert Specific DOCX Pages to PDF
 
-This example demonstrates how to convert specific pages from docx to pdf using GroupDocs.Conversion.LowCode.
+To convert only a portion of the document instead of all pages. You can specify which pages to include in the output PDF using the [Pages](https://reference.groupdocs.net/conversion/GroupDocs.Conversion.Options.Convert/IPagedConvertOptions/PageNumber/) property of `PdfConvertOptions` class.
 
-## Overview
+As an alternative you can use `PageNumber` to specify the page number to start conversion from and `PagesCount` to set number of pages to convert starting from `PageNumber`. 
 
-This console application shows how to convert specific pages from docx to pdf.
+The following example shows how to convert the first three pages of a DOCX file to PDF:
 
-## Purpose
+## Code Example
 
-This example demonstrates the **specific docx pages to pdf workflow**:
-- Convert specific pages from DOCX to PDF
-- Basic file input/output handling
-- Straightforward conversion process
+```fsharp
+open System
+open System.Collections.Generic
+open GroupDocs.Conversion.LowCode
 
-## Files
+[<EntryPoint>]
+let main argv =
+    // Load license keys
+    let publicKey = Environment.GetEnvironmentVariable("GD_PUBLIC_KEY")
+    let privateKey = Environment.GetEnvironmentVariable("GD_PRIVATE_KEY")
 
-### Input Files
-- `business-plan.docx` - Source document for conversion
+    // Apply license
+    License.Set(publicKey, privateKey)
 
-### Output Files
-- `business-plan.pdf` - Converted output document
+    // Create the converter
+    let converter = new DocxToPdfConverter("business-plan.docx")
 
-## Running the Example
+    // Save first three pages to PDF
+    converter.Convert("pages-1-2-3.pdf", fun convertOptions ->
+        convertOptions.Pages <- List<int>([1; 2; 3])
+    )
 
-1. Ensure you have .NET 6.0 or later installed
-2. Set your GroupDocs license keys as environment variables:
-   - `GD_PUBLIC_KEY`
-   - `GD_PRIVATE_KEY`
-3. Navigate to this directory
-4. Run the example:
+    0 // return exit code
+```
+
+## How to Run
+
+1. Install the .NET SDK for `net10.0`.
+2. Set the `GD_PUBLIC_KEY` and `GD_PRIVATE_KEY` environment variables to your license keys.
+3. Open this directory and run the example:
    ```bash
    dotnet run
    ```
 
-## Code Overview
+## Input Files
 
-The conversion logic in Program.fs demonstrates:
-- License setup from environment variables
-- Convert specific pages from DOCX to PDF
-- Basic conversion workflow
-- File output
+- `business-plan.docx`
 
-## Requirements
+## Learn More
 
-- .NET 6.0 or later
-- GroupDocs.Conversion.LowCode package
-- Valid GroupDocs license keys (Optional)
-
-## Related Documentation
-
-For more information about document conversion, see the [GroupDocs.Conversion.LowCode documentation](https://docs.groupdocs.net/conversion/developer-guide/).
-
+- [Using DOCX to PDF Converter](https://docs.groupdocs.net/conversion/developer-guide/using-docx-to-pdf-converter/) in the GroupDocs.Conversion.LowCode documentation
+- [GroupDocs.Conversion.LowCode](https://www.nuget.org/packages/GroupDocs.Conversion.LowCode) on NuGet
+- [Get a temporary license](https://purchase.groupdocs.net/temporary-license/)

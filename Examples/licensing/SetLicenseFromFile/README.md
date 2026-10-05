@@ -1,53 +1,34 @@
-﻿# Set License from File
+# Set License from File
 
-This example demonstrates how to set groupdocs license from file using GroupDocs.Conversion.LowCode.
+The following code demonstrates setting a license from a file:
 
-## Overview
+## Code Example
 
-This console application shows how to set groupdocs license from file.
+```fsharp
+open GroupDocs.Conversion.LowCode
 
-## Purpose
+[<EntryPoint>]
+let main argv =
+    // The path to the license file. The path can be relative or absolute.
+    let licensePath = "./GroupDocs.Conversion.LowCode.lic"
 
-This example demonstrates the **set license from file workflow**:
-- Set GroupDocs license from file
-- Basic file input/output handling
-- Straightforward conversion process
+    // Apply the license.
+    License.Set(licensePath)
 
-## Files
+    0 // Return exit code
+```
 
-### Input Files
-- No input files required
+## How to Run
 
-### Output Files
-- No output files generated
-
-## Running the Example
-
-1. Ensure you have .NET 6.0 or later installed
-2. Set your GroupDocs license keys as environment variables:
-   - `GD_PUBLIC_KEY`
-   - `GD_PRIVATE_KEY`
-3. Navigate to this directory
-4. Run the example:
+1. Install the .NET SDK for `net10.0`.
+2. Edit `Program.fs` so that it uses your license: the path to your license file, or your public and private keys.
+3. Open this directory and run the example:
    ```bash
    dotnet run
    ```
 
-## Code Overview
+## Learn More
 
-The conversion logic in Program.fs demonstrates:
-- License setup from environment variables
-- Set GroupDocs license from file
-- Basic conversion workflow
-- File output
-
-## Requirements
-
-- .NET 6.0 or later
-- GroupDocs.Conversion.LowCode package
-- Valid GroupDocs license keys (Optional)
-
-## Related Documentation
-
-For more information about document conversion, see the [GroupDocs.Conversion.LowCode documentation](https://docs.groupdocs.net/conversion/developer-guide/).
-
+- [Licensing](https://docs.groupdocs.net/conversion/licensing/) in the GroupDocs.Conversion.LowCode documentation
+- [GroupDocs.Conversion.LowCode](https://www.nuget.org/packages/GroupDocs.Conversion.LowCode) on NuGet
+- [Get a temporary license](https://purchase.groupdocs.net/temporary-license/)

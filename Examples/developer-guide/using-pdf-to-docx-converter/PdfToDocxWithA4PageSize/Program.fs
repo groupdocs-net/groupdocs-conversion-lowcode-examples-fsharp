@@ -1,6 +1,6 @@
 open System
 open GroupDocs.Conversion.LowCode
-open GroupDocs.Conversion.Options.Convert
+open GroupDocs.Conversion.Options
 
 [<EntryPoint>]
 let main argv =
@@ -16,7 +16,7 @@ let main argv =
 
     // Convert to DOCX with A4 page size
     converter.Convert("a4-size.docx", fun convertOptions ->
-        convertOptions.PageSize <- PageSize.A4
+        convertOptions.SizeSettings <- PageSizeOptions(PageSize = PageSize.A4)
     )
 
     0 // return exit code

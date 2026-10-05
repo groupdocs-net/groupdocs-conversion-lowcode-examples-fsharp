@@ -1,53 +1,49 @@
-﻿# DOC with Tracked Changes to PDF
+# Convert DOC with Tracked Changes to PDF
 
-This example demonstrates how to convert doc with tracked changes to pdf using GroupDocs.Conversion.LowCode.
+By default, tracked changes are converted and displayed in the output PDF document. See this [tracked-changes.pdf](https://docs.groupdocs.net/conversion/_sample_files/developer-guide/using-doc-to-pdf-converter/tracked-changes.pdf) that includes the list of changes.
 
-## Overview
+The following example shows how to convert a DOC file that contains tracked changes and save a clean PDF file without those revisions.
 
-This console application shows how to convert doc with tracked changes to pdf.
+## Code Example
 
-## Purpose
+```fsharp
+open System
+open GroupDocs.Conversion.LowCode
 
-This example demonstrates the **doc with tracked changes to pdf workflow**:
-- Convert DOC with tracked changes to PDF
-- Basic file input/output handling
-- Straightforward conversion process
+[<EntryPoint>]
+let main _ =
+    // Load license keys
+    let publicKey = Environment.GetEnvironmentVariable("GD_PUBLIC_KEY")
+    let privateKey = Environment.GetEnvironmentVariable("GD_PRIVATE_KEY")
 
-## Files
+    // Apply license
+    License.Set(publicKey, privateKey)
 
-### Input Files
-- `business-plan.docx` - Source document for conversion
+    // Hide tracked changes through load options
+    let converter = new DocToPdfConverter("tracked-changes.doc", fun options ->
+        options.HideWordTrackedChanges <- true
+    )
 
-### Output Files
-- `business-plan.pdf` - Converted output document
+    // Convert DOC to PDF
+    converter.Convert("clean.pdf")
+    0
+```
 
-## Running the Example
+## How to Run
 
-1. Ensure you have .NET 6.0 or later installed
-2. Set your GroupDocs license keys as environment variables:
-   - `GD_PUBLIC_KEY`
-   - `GD_PRIVATE_KEY`
-3. Navigate to this directory
-4. Run the example:
+1. Install the .NET SDK for `net10.0`.
+2. Set the `GD_PUBLIC_KEY` and `GD_PRIVATE_KEY` environment variables to your license keys.
+3. Open this directory and run the example:
    ```bash
    dotnet run
    ```
 
-## Code Overview
+## Input Files
 
-The conversion logic in Program.fs demonstrates:
-- License setup from environment variables
-- Convert DOC with tracked changes to PDF
-- Basic conversion workflow
-- File output
+- `tracked-changes.doc`
 
-## Requirements
+## Learn More
 
-- .NET 6.0 or later
-- GroupDocs.Conversion.LowCode package
-- Valid GroupDocs license keys (Optional)
-
-## Related Documentation
-
-For more information about document conversion, see the [GroupDocs.Conversion.LowCode documentation](https://docs.groupdocs.net/conversion/developer-guide/).
-
+- [Using DOC to PDF Converter](https://docs.groupdocs.net/conversion/developer-guide/using-doc-to-pdf-converter/) in the GroupDocs.Conversion.LowCode documentation
+- [GroupDocs.Conversion.LowCode](https://www.nuget.org/packages/GroupDocs.Conversion.LowCode) on NuGet
+- [Get a temporary license](https://purchase.groupdocs.net/temporary-license/)

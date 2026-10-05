@@ -1,53 +1,40 @@
-﻿# Copy The Code Example
+# Step 5: Copy the Code Example
 
-This example demonstrates how to perform a basic XLSX to PDF conversion using GroupDocs.Conversion.LowCode.
+Replace the contents of your `Program` file with the example code below.
 
-## Overview
+## Code Example
 
-This console application shows how to create a converter and perform a simple document conversion from XLSX to PDF format.
+```fsharp
+open System
+open GroupDocs.Conversion.LowCode
 
-## Purpose
+[<EntryPoint>]
+let main _ =
+    let publicKey = Environment.GetEnvironmentVariable("GD_PUBLIC_KEY")
+    let privateKey = Environment.GetEnvironmentVariable("GD_PRIVATE_KEY")
 
-This example demonstrates the **basic conversion workflow**:
-- License setup from environment variables
-- Simple XLSX to PDF conversion
-- Basic file input/output handling
-- Straightforward conversion process
+    License.Set(publicKey, privateKey)
 
-## Files
+    let converter = new XlsxToPdfConverter("cost-analysis.xlsx")
+    converter.Convert("cost-analysis.pdf")
+    0
+```
 
-### Input Files
-- `cost-analysis.xlsx` - Source document for conversion
+## How to Run
 
-### Output Files
-- `cost-analysis.pdf` - Converted output document
-
-## Running the Example
-
-1. Ensure you have .NET 6.0 or later installed
-2. Set your GroupDocs license keys as environment variables:
-   - `GD_PUBLIC_KEY`
-   - `GD_PRIVATE_KEY`
-3. Navigate to this directory
-4. Run the example:
+1. Install the .NET SDK for `net10.0`.
+2. Set the `GD_PUBLIC_KEY` and `GD_PRIVATE_KEY` environment variables to your license keys.
+3. Open this directory and run the example:
    ```bash
    dotnet run
    ```
 
-## Code Overview
+## Input Files
 
-The conversion logic in `Program.fs` demonstrates:
-- License setup from environment variables
-- Document loading using file path: `new XlsxToPdfConverter("cost-analysis.xlsx")`
-- Basic conversion workflow
-- File output
+- `cost-analysis.xlsx`
 
-## Requirements
+## Learn More
 
-- .NET 6.0 or later
-- GroupDocs.Conversion.LowCode package
-- Valid GroupDocs license keys (Optional)
-
-## Related Documentation
-
-For more information about document conversion, see the [GroupDocs.Conversion.LowCode documentation](https://docs.groupdocs.net/conversion/developer-guide/). 
+- [Developer Guide](https://docs.groupdocs.net/conversion/developer-guide/) in the GroupDocs.Conversion.LowCode documentation
+- [GroupDocs.Conversion.LowCode](https://www.nuget.org/packages/GroupDocs.Conversion.LowCode) on NuGet
+- [Get a temporary license](https://purchase.groupdocs.net/temporary-license/)

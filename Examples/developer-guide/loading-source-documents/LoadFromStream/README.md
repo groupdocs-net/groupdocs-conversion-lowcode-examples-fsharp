@@ -1,54 +1,49 @@
-﻿# Load from Stream
+# Example 2: Load from Stream
 
-This example demonstrates how to load source documents from a stream using GroupDocs.Conversion.LowCode.
+This example demonstrates how to load a document from a stream (e.g., memory or custom storage provider).
 
-## Overview
+## Code Example
 
-This console application shows how to create a converter by loading the source document from a file stream.
+```fsharp
+open System
+open System.IO
+open GroupDocs.Conversion.LowCode
 
-## Purpose
+[<EntryPoint>]
+let main _ =
+    // Load license keys
+    let publicKey = Environment.GetEnvironmentVariable("GD_PUBLIC_KEY")
+    let privateKey = Environment.GetEnvironmentVariable("GD_PRIVATE_KEY")
 
-This example demonstrates the **stream loading method**:
-- Loading documents using file streams
-- Memory-efficient approach for large files
-- Suitable for processing files in memory
-- Basic DOCX to PDF conversion workflow
+    // Apply license
+    License.Set(publicKey, privateKey)
 
-## Files
+    // Load stream
+    use stream = File.OpenRead("business-plan.docx")
 
-### Input Files
-- `business-plan.docx` - Source document for conversion
+    // Create a converter from stream
+    let converter = new DocxToPdfConverter(stream)
 
-### Output Files
-- `business-plan.pdf` - Converted output document
+    // Convert DOCX to PDF
+    converter.Convert("business-plan.pdf")
+    0
+```
 
-## Running the Example
+## How to Run
 
-1. Ensure you have .NET 6.0 or later installed
-2. Set your GroupDocs license keys as environment variables:
-   - `GD_PUBLIC_KEY`
-   - `GD_PRIVATE_KEY`
-3. Navigate to this directory
-4. Run the example:
+1. Install the .NET SDK for `net10.0`.
+2. Set the `GD_PUBLIC_KEY` and `GD_PRIVATE_KEY` environment variables to your license keys.
+3. Open this directory and run the example:
    ```bash
    dotnet run
    ```
 
-## Code Overview
+## Input Files
 
-The loading logic in `Program.fs` demonstrates:
-- License setup from environment variables
-- File stream creation: `File.OpenRead("business-plan.docx")`
-- Document loading using stream: `new DocxToPdfConverter(stream)`
-- Basic conversion workflow
-- File output
+- `business-plan.docx`
 
-## Requirements
+## Learn More
 
-- .NET 6.0 or later
-- GroupDocs.Conversion.LowCode package
-- Valid GroupDocs license keys (Optional)
-
-## Related Documentation
-
-For more information about loading source documents, see the [GroupDocs.Conversion.LowCode documentation](https://docs.groupdocs.net/conversion/developer-guide/loading-source-documents/). 
+- [Loading Source Documents](https://docs.groupdocs.net/conversion/developer-guide/loading-source-documents/) in the GroupDocs.Conversion.LowCode documentation
+- [GroupDocs.Conversion.LowCode](https://www.nuget.org/packages/GroupDocs.Conversion.LowCode) on NuGet
+- [Get a temporary license](https://purchase.groupdocs.net/temporary-license/)

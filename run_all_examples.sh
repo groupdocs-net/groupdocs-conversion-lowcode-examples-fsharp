@@ -31,13 +31,14 @@ if [ "$license_warning" = true ]; then
 fi
 
 echo "[INFO] Starting to run all GroupDocs.Conversion.LowCode examples..."
-echo "[INFO] This will execute 70+ examples demonstrating various conversion features."
+echo "[INFO] This will run 67 examples and skip 2 that need a license put into Program.fs."
 echo "[INFO] Each example will be built and run individually."
 echo
 
 project_count=0
 success_count=0
 failed_count=0
+skipped_count=0
 
 echo "========================================"
 echo "Running Examples..."
@@ -47,27 +48,34 @@ while IFS= read -r -d '' file; do
     ((project_count++))
     dir=$(dirname "$file")
     project_name=$(basename "$dir")
-    
+
     echo
     echo "[$project_count] Running: $project_name"
     echo "   Directory: $dir"
-    
+
+    # Skip examples that read a license file or keys from the code
+    if grep -qF "License.Set" "$dir/Program.fs" && ! grep -qF "GD_PUBLIC_KEY" "$dir/Program.fs"; then
+        echo "   [SKIPPED] Needs your license in Program.fs; add it and run this example with dotnet run"
+        ((skipped_count++))
+        continue
+    fi
+
     # Change to project directory
     cd "$dir" || {
         echo "   [ERROR] Could not change to directory: $dir"
         ((failed_count++))
         continue
     }
-    
+
     # Try to build first
     echo "   Building project..."
     if dotnet build --verbosity quiet >/dev/null 2>&1; then
         echo "   Building successful, running example..."
-        
+
         # Capture output and check for unhandled exceptions
         run_output=$(dotnet run --verbosity quiet 2>&1)
         run_exit_code=$?
-        
+
         # Check if output contains "Unhandled exception"
         if echo "$run_output" | grep -qi "Unhandled exception"; then
             echo "   [ERROR] Unhandled exception detected in: $project_name"
@@ -87,7 +95,7 @@ while IFS= read -r -d '' file; do
         echo "   [ERROR] Build failed for: $project_name"
         ((failed_count++))
     fi
-    
+
     # Return to original directory
     cd - >/dev/null 2>&1
 done < <(find ./Examples -name "*.fsproj" -print0)
@@ -99,10 +107,15 @@ echo "========================================"
 echo "Total projects found: $project_count"
 echo "Successful runs: $success_count"
 echo "Failed runs: $failed_count"
+echo "Skipped: $skipped_count"
 
 if [ $failed_count -gt 0 ]; then
     echo
-    echo "[TIP] Check individual example README.md files for specific requirements."
+    echo "[NOTE] Some examples failed. This might be due to:"
+    echo "       - Missing license keys"
+    echo "       - Missing sample files"
+    echo "       - .NET version compatibility"
+    echo "       - File access permissions"
 fi
 
 echo

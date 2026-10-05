@@ -1,53 +1,47 @@
-﻿# HTML with Custom CSS Styling
+# Convert HTML with Custom CSS Styling
 
-This example demonstrates how to convert html with custom css styling to pdf using GroupDocs.Conversion.LowCode.
+The following example shows how to apply custom CSS styling when converting HTML to PDF using the `CustomCssStyle` property.
 
-## Overview
+## Code Example
 
-This console application shows how to convert html with custom css styling to pdf.
+```fsharp
+open System
+open GroupDocs.Conversion.LowCode
 
-## Purpose
+[<EntryPoint>]
+let main _ =
+    // Load license keys
+    let publicKey = Environment.GetEnvironmentVariable("GD_PUBLIC_KEY")
+    let privateKey = Environment.GetEnvironmentVariable("GD_PRIVATE_KEY")
 
-This example demonstrates the **html with custom css styling workflow**:
-- Convert HTML with custom CSS styling to PDF
-- Basic file input/output handling
-- Straightforward conversion process
+    // Apply license
+    License.Set(publicKey, privateKey)
 
-## Files
+    // Apply custom CSS styling through load options
+    let converter = new HtmlToPdfConverter("sample.html", fun options ->
+        options.CustomCssStyle <- "body { font-family: Arial, sans-serif; font-size: 14px; color: #333; }"
+    )
+    
+    // Convert HTML to PDF
+    converter.Convert("styled-sample.pdf")
+    0
+```
 
-### Input Files
-- `business-plan.docx` - Source document for conversion
+## How to Run
 
-### Output Files
-- `business-plan.pdf` - Converted output document
-
-## Running the Example
-
-1. Ensure you have .NET 6.0 or later installed
-2. Set your GroupDocs license keys as environment variables:
-   - `GD_PUBLIC_KEY`
-   - `GD_PRIVATE_KEY`
-3. Navigate to this directory
-4. Run the example:
+1. Install the .NET SDK for `net10.0`.
+2. Set the `GD_PUBLIC_KEY` and `GD_PRIVATE_KEY` environment variables to your license keys.
+3. Open this directory and run the example:
    ```bash
    dotnet run
    ```
 
-## Code Overview
+## Input Files
 
-The conversion logic in Program.fs demonstrates:
-- License setup from environment variables
-- Convert HTML with custom CSS styling to PDF
-- Basic conversion workflow
-- File output
+- `sample.html`
 
-## Requirements
+## Learn More
 
-- .NET 6.0 or later
-- GroupDocs.Conversion.LowCode package
-- Valid GroupDocs license keys (Optional)
-
-## Related Documentation
-
-For more information about document conversion, see the [GroupDocs.Conversion.LowCode documentation](https://docs.groupdocs.net/conversion/developer-guide/).
-
+- [Using HTML to PDF Converter](https://docs.groupdocs.net/conversion/developer-guide/using-html-to-pdf-converter/) in the GroupDocs.Conversion.LowCode documentation
+- [GroupDocs.Conversion.LowCode](https://www.nuget.org/packages/GroupDocs.Conversion.LowCode) on NuGet
+- [Get a temporary license](https://purchase.groupdocs.net/temporary-license/)

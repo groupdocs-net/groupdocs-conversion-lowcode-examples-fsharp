@@ -1,53 +1,51 @@
-﻿# PDF with Annotations to Markdown without Annotations
+# Convert PDF with Annotations to Markdown without Annotations
 
-This example demonstrates how to convert pdf with annotations to markdown without annotations using GroupDocs.Conversion.LowCode.
+By default, annotations are added to the output Markdown file, see this [with-annotations.pdf](https://docs.groupdocs.net/conversion/_sample_files/developer-guide/using-pdf-to-md-converter/with-annotations.pdf) (text `HOME BASED PROFESSIONAL SERVICES` is highlighted) as an example of PDF file with annotations.
 
-## Overview
+The following example shows how to convert a PDF file that contains annotations and save a Markdown file without annotations.
 
-This console application shows how to convert pdf with annotations to markdown without annotations.
+## Code Example
 
-## Purpose
+```fsharp
+open System
+open GroupDocs.Conversion.LowCode
 
-This example demonstrates the **pdf with annotations to markdown without annotations workflow**:
-- Convert PDF with annotations to Markdown without annotations
-- Basic file input/output handling
-- Straightforward conversion process
+[<EntryPoint>]
+let main argv =
+    // Load license keys
+    let publicKey = Environment.GetEnvironmentVariable("GD_PUBLIC_KEY")
+    let privateKey = Environment.GetEnvironmentVariable("GD_PRIVATE_KEY")
 
-## Files
+    // Apply license
+    License.Set(publicKey, privateKey)
 
-### Input Files
-- `business-plan.docx` - Source document for conversion
+    // Hide annotations using HidePdfAnnotations
+    let converter = 
+        new PdfToMdConverter("with-annotations.pdf", fun options ->
+            options.HidePdfAnnotations <- true
+        )
 
-### Output Files
-- `business-plan.pdf` - Converted output document
+    // Convert PDF to Markdown
+    converter.Convert("no-annotations.md")
 
-## Running the Example
+    0 // return an integer exit code
+```
 
-1. Ensure you have .NET 6.0 or later installed
-2. Set your GroupDocs license keys as environment variables:
-   - `GD_PUBLIC_KEY`
-   - `GD_PRIVATE_KEY`
-3. Navigate to this directory
-4. Run the example:
+## How to Run
+
+1. Install the .NET SDK for `net10.0`.
+2. Set the `GD_PUBLIC_KEY` and `GD_PRIVATE_KEY` environment variables to your license keys.
+3. Open this directory and run the example:
    ```bash
    dotnet run
    ```
 
-## Code Overview
+## Input Files
 
-The conversion logic in Program.fs demonstrates:
-- License setup from environment variables
-- Convert PDF with annotations to Markdown without annotations
-- Basic conversion workflow
-- File output
+- `with-annotations.pdf`
 
-## Requirements
+## Learn More
 
-- .NET 6.0 or later
-- GroupDocs.Conversion.LowCode package
-- Valid GroupDocs license keys (Optional)
-
-## Related Documentation
-
-For more information about document conversion, see the [GroupDocs.Conversion.LowCode documentation](https://docs.groupdocs.net/conversion/developer-guide/).
-
+- [Using PDF to MD Converter](https://docs.groupdocs.net/conversion/developer-guide/using-pdf-to-md-converter/) in the GroupDocs.Conversion.LowCode documentation
+- [GroupDocs.Conversion.LowCode](https://www.nuget.org/packages/GroupDocs.Conversion.LowCode) on NuGet
+- [Get a temporary license](https://purchase.groupdocs.net/temporary-license/)

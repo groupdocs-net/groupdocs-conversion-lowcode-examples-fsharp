@@ -1,54 +1,47 @@
-﻿# Set Load Options
+# Example 3: Set Load Options
 
-This example demonstrates how to set load options when loading source documents using GroupDocs.Conversion.LowCode.
+You can use the optional constructor parameter to apply custom load options such as passwords for protected files.
 
-## Overview
+## Code Example
 
-This console application shows how to create a converter with custom load options, specifically for handling password-protected documents.
+```fsharp
+open System
+open GroupDocs.Conversion.LowCode
 
-## Purpose
+[<EntryPoint>]
+let main _ =
+    // Load license keys
+    let publicKey = Environment.GetEnvironmentVariable("GD_PUBLIC_KEY")
+    let privateKey = Environment.GetEnvironmentVariable("GD_PRIVATE_KEY")
+    
+    // Apply license
+    License.Set(publicKey, privateKey)
 
-This example demonstrates the **load options configuration**:
-- Setting password for protected documents
-- Customizing document loading behavior
-- Handling encrypted files
-- Basic DOCX to PDF conversion workflow
+    // Provide password through load options
+    let converter = new DocxToPdfConverter("protected.docx", fun options ->
+        options.Password <- "12345"
+    )
+    
+    // Convert DOCX to PDF
+    converter.Convert("not-protected.pdf")
+    0
+```
 
-## Files
+## How to Run
 
-### Input Files
-- `protected.docx` - Password-protected source document for conversion
-
-### Output Files
-- `not-protected.pdf` - Converted output document
-
-## Running the Example
-
-1. Ensure you have .NET 6.0 or later installed
-2. Set your GroupDocs license keys as environment variables:
-   - `GD_PUBLIC_KEY`
-   - `GD_PRIVATE_KEY`
-3. Navigate to this directory
-4. Run the example:
+1. Install the .NET SDK for `net10.0`.
+2. Set the `GD_PUBLIC_KEY` and `GD_PRIVATE_KEY` environment variables to your license keys.
+3. Open this directory and run the example:
    ```bash
    dotnet run
    ```
 
-## Code Overview
+## Input Files
 
-The loading logic in `Program.fs` demonstrates:
-- License setup from environment variables
-- Document loading with load options: `new DocxToPdfConverter("protected.docx", fun options -> options.Password <- "12345")`
-- Password configuration for protected documents
-- Basic conversion workflow
-- File output
+- `protected.docx`
 
-## Requirements
+## Learn More
 
-- .NET 6.0 or later
-- GroupDocs.Conversion.LowCode package
-- Valid GroupDocs license keys (Optional)
-
-## Related Documentation
-
-For more information about loading source documents, see the [GroupDocs.Conversion.LowCode documentation](https://docs.groupdocs.net/conversion/developer-guide/loading-source-documents/). 
+- [Loading Source Documents](https://docs.groupdocs.net/conversion/developer-guide/loading-source-documents/) in the GroupDocs.Conversion.LowCode documentation
+- [GroupDocs.Conversion.LowCode](https://www.nuget.org/packages/GroupDocs.Conversion.LowCode) on NuGet
+- [Get a temporary license](https://purchase.groupdocs.net/temporary-license/)

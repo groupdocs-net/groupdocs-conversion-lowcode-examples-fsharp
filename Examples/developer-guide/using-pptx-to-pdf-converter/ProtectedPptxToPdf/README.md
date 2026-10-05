@@ -1,53 +1,49 @@
-﻿# Protected PPTX to PDF
+# Convert Protected PPTX to PDF
 
-This example demonstrates how to convert password-protected pptx to pdf using GroupDocs.Conversion.LowCode.
+The following example shows how to convert protected PPTX file and save it to unprotected PDF file.
 
-## Overview
+In case you do not specify password for protected document [PasswordRequiredException](https://reference.groupdocs.net/conversion/GroupDocs.Conversion.Exceptions/PasswordRequiredException/) is going to be thrown.
 
-This console application shows how to convert password-protected pptx to pdf.
+## Code Example
 
-## Purpose
+```fsharp
+open System
+open GroupDocs.Conversion.LowCode
 
-This example demonstrates the **protected pptx to pdf workflow**:
-- Convert password-protected PPTX to PDF
-- Basic file input/output handling
-- Straightforward conversion process
+[<EntryPoint>]
+let main _ =
+    // Load license keys
+    let publicKey = Environment.GetEnvironmentVariable("GD_PUBLIC_KEY")
+    let privateKey = Environment.GetEnvironmentVariable("GD_PRIVATE_KEY")
+    
+    // Apply license
+    License.Set(publicKey, privateKey)
 
-## Files
+    // Provide password through load options
+    let converter = new PptxToPdfConverter("protected.pptx", fun options ->
+        options.Password <- "12345"
+    )
+    
+    // Convert PPTX to PDF
+    converter.Convert("unprotected.pdf")
+    0
+```
 
-### Input Files
-- `business-plan.docx` - Source document for conversion
+## How to Run
 
-### Output Files
-- `business-plan.pdf` - Converted output document
-
-## Running the Example
-
-1. Ensure you have .NET 6.0 or later installed
-2. Set your GroupDocs license keys as environment variables:
-   - `GD_PUBLIC_KEY`
-   - `GD_PRIVATE_KEY`
-3. Navigate to this directory
-4. Run the example:
+1. Install the .NET SDK for `net10.0`.
+2. Set the `GD_PUBLIC_KEY` and `GD_PRIVATE_KEY` environment variables to your license keys.
+3. Open this directory and run the example:
    ```bash
    dotnet run
    ```
 
-## Code Overview
+## Input Files
 
-The conversion logic in Program.fs demonstrates:
-- License setup from environment variables
-- Convert password-protected PPTX to PDF
-- Basic conversion workflow
-- File output
+- `protected.pptx`
 
-## Requirements
+## Learn More
 
-- .NET 6.0 or later
-- GroupDocs.Conversion.LowCode package
-- Valid GroupDocs license keys (Optional)
-
-## Related Documentation
-
-For more information about document conversion, see the [GroupDocs.Conversion.LowCode documentation](https://docs.groupdocs.net/conversion/developer-guide/).
-
+- [Using PPTX to PDF Converter](https://docs.groupdocs.net/conversion/developer-guide/using-pptx-to-pdf-converter/) in the GroupDocs.Conversion.LowCode documentation
+- [GroupDocs.Conversion.LowCode](https://www.nuget.org/packages/GroupDocs.Conversion.LowCode) on NuGet
+- [Get a temporary license](https://purchase.groupdocs.net/temporary-license/)

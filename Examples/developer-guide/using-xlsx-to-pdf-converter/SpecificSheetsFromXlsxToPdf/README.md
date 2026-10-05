@@ -1,53 +1,48 @@
-﻿# Specific Sheets from XLSX to PDF
+# Convert Specific Sheets from XLSX to PDF
 
-This example demonstrates how to convert specific sheets from xlsx to pdf using GroupDocs.Conversion.LowCode.
+The following example shows how to convert only specific sheets from an XLSX file to PDF using the `SheetIndexes` property.
 
-## Overview
+## Code Example
 
-This console application shows how to convert specific sheets from xlsx to pdf.
+```fsharp
+open System
+open System.Collections.Generic
+open GroupDocs.Conversion.LowCode
 
-## Purpose
+[<EntryPoint>]
+let main _ =
+    // Load license keys
+    let publicKey = Environment.GetEnvironmentVariable("GD_PUBLIC_KEY")
+    let privateKey = Environment.GetEnvironmentVariable("GD_PRIVATE_KEY")
+    
+    // Apply license
+    License.Set(publicKey, privateKey)
 
-This example demonstrates the **specific sheets from xlsx to pdf workflow**:
-- Convert specific sheets from XLSX to PDF
-- Basic file input/output handling
-- Straightforward conversion process
+    // Convert only specific sheets (first and third sheets)
+    let converter = new XlsxToPdfConverter("invoice-tracker.xlsx", fun options ->
+        options.SheetIndexes <- List<int>([0; 2]) // 0-based indexing
+    )
+    
+    // Convert XLSX to PDF
+    converter.Convert("specific-sheets.pdf")
+    0
+```
 
-## Files
+## How to Run
 
-### Input Files
-- `business-plan.docx` - Source document for conversion
-
-### Output Files
-- `business-plan.pdf` - Converted output document
-
-## Running the Example
-
-1. Ensure you have .NET 6.0 or later installed
-2. Set your GroupDocs license keys as environment variables:
-   - `GD_PUBLIC_KEY`
-   - `GD_PRIVATE_KEY`
-3. Navigate to this directory
-4. Run the example:
+1. Install the .NET SDK for `net10.0`.
+2. Set the `GD_PUBLIC_KEY` and `GD_PRIVATE_KEY` environment variables to your license keys.
+3. Open this directory and run the example:
    ```bash
    dotnet run
    ```
 
-## Code Overview
+## Input Files
 
-The conversion logic in Program.fs demonstrates:
-- License setup from environment variables
-- Convert specific sheets from XLSX to PDF
-- Basic conversion workflow
-- File output
+- `invoice-tracker.xlsx`
 
-## Requirements
+## Learn More
 
-- .NET 6.0 or later
-- GroupDocs.Conversion.LowCode package
-- Valid GroupDocs license keys (Optional)
-
-## Related Documentation
-
-For more information about document conversion, see the [GroupDocs.Conversion.LowCode documentation](https://docs.groupdocs.net/conversion/developer-guide/).
-
+- [Using XLSX to PDF Converter](https://docs.groupdocs.net/conversion/developer-guide/using-xlsx-to-pdf-converter/) in the GroupDocs.Conversion.LowCode documentation
+- [GroupDocs.Conversion.LowCode](https://www.nuget.org/packages/GroupDocs.Conversion.LowCode) on NuGet
+- [Get a temporary license](https://purchase.groupdocs.net/temporary-license/)

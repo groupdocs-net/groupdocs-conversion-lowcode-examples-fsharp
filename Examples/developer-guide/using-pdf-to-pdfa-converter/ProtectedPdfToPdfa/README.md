@@ -1,53 +1,49 @@
-﻿# Protected PDF to PDF/A
+# Convert Protected PDF to PDF/A
 
-This example demonstrates how to convert password-protected pdf to pdf/a using GroupDocs.Conversion.LowCode.
+The following example shows how to convert protected PDF file and save it to unprotected PDF/A file.
 
-## Overview
+In case you do not specify password for protected document [PasswordRequiredException](https://reference.groupdocs.net/conversion/GroupDocs.Conversion.Exceptions/PasswordRequiredException/) is going to be thrown.
 
-This console application shows how to convert password-protected pdf to pdf/a.
+## Code Example
 
-## Purpose
+```fsharp
+open System
+open GroupDocs.Conversion.LowCode
 
-This example demonstrates the **protected pdf to pdf/a workflow**:
-- Convert password-protected PDF to PDF/A
-- Basic file input/output handling
-- Straightforward conversion process
+[<EntryPoint>]
+let main _ =
+    // Load license keys
+    let publicKey = Environment.GetEnvironmentVariable("GD_PUBLIC_KEY")
+    let privateKey = Environment.GetEnvironmentVariable("GD_PRIVATE_KEY")
 
-## Files
+    // Apply license
+    License.Set(publicKey, privateKey)
 
-### Input Files
-- `business-plan.docx` - Source document for conversion
+    // Provide password through load options
+    let converter = new PdfToPdfAConverter("protected.pdf", fun options ->
+        options.Password <- "12345"
+    )
+    
+    // Convert PDF to PDF/A
+    converter.Convert("not-protected.pdf")
+    0
+```
 
-### Output Files
-- `business-plan.pdf` - Converted output document
+## How to Run
 
-## Running the Example
-
-1. Ensure you have .NET 6.0 or later installed
-2. Set your GroupDocs license keys as environment variables:
-   - `GD_PUBLIC_KEY`
-   - `GD_PRIVATE_KEY`
-3. Navigate to this directory
-4. Run the example:
+1. Install the .NET SDK for `net10.0`.
+2. Set the `GD_PUBLIC_KEY` and `GD_PRIVATE_KEY` environment variables to your license keys.
+3. Open this directory and run the example:
    ```bash
    dotnet run
    ```
 
-## Code Overview
+## Input Files
 
-The conversion logic in Program.fs demonstrates:
-- License setup from environment variables
-- Convert password-protected PDF to PDF/A
-- Basic conversion workflow
-- File output
+- `protected.pdf`
 
-## Requirements
+## Learn More
 
-- .NET 6.0 or later
-- GroupDocs.Conversion.LowCode package
-- Valid GroupDocs license keys (Optional)
-
-## Related Documentation
-
-For more information about document conversion, see the [GroupDocs.Conversion.LowCode documentation](https://docs.groupdocs.net/conversion/developer-guide/).
-
+- [Using PDF to PDF/A Converter](https://docs.groupdocs.net/conversion/developer-guide/using-pdf-to-pdfa-converter/) in the GroupDocs.Conversion.LowCode documentation
+- [GroupDocs.Conversion.LowCode](https://www.nuget.org/packages/GroupDocs.Conversion.LowCode) on NuGet
+- [Get a temporary license](https://purchase.groupdocs.net/temporary-license/)

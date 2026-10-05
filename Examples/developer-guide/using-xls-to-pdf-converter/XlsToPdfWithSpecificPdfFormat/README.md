@@ -1,53 +1,51 @@
-﻿# XLS to PDF with Specific PDF Format
+# Convert XLS to PDF with Specific PDF Format
 
-This example demonstrates how to convert xls to specific pdf format using GroupDocs.Conversion.LowCode.
+You can specify the PDF format for the output file using the [PdfFormat](https://reference.groupdocs.net/conversion/GroupDocs.Conversion.Options.Convert/PdfOptions/PdfFormat/) property in `PdfOptions` class. This allows you to create PDF files that conform to specific standards like PDF/A for archiving or PDF/X for print production.
 
-## Overview
+The following example shows how to convert an XLS file to PDF/A-1b format, which is commonly used for long-term archiving:
 
-This console application shows how to convert xls to specific pdf format.
+## Code Example
 
-## Purpose
+```fsharp
+open System
+open GroupDocs.Conversion.LowCode
+open GroupDocs.Conversion.Options.Convert
 
-This example demonstrates the **xls to pdf with specific pdf format workflow**:
-- Convert XLS to specific PDF format
-- Basic file input/output handling
-- Straightforward conversion process
+[<EntryPoint>]
+let main argv =
+    // Load license keys
+    let publicKey = Environment.GetEnvironmentVariable("GD_PUBLIC_KEY")
+    let privateKey = Environment.GetEnvironmentVariable("GD_PRIVATE_KEY")
 
-## Files
+    // Apply license
+    License.Set(publicKey, privateKey)
 
-### Input Files
-- `business-plan.docx` - Source document for conversion
+    // Create the converter
+    let converter = new XlsToPdfConverter("cost-analysis.xls")
 
-### Output Files
-- `business-plan.pdf` - Converted output document
+    // Convert to PDF/A-1b format for archiving
+    converter.Convert("converted.pdf", fun convertOptions ->
+        convertOptions.PdfOptions.PdfFormat <- PdfFormats.PdfA_1B
+    )
 
-## Running the Example
+    0 // return exit code
+```
 
-1. Ensure you have .NET 6.0 or later installed
-2. Set your GroupDocs license keys as environment variables:
-   - `GD_PUBLIC_KEY`
-   - `GD_PRIVATE_KEY`
-3. Navigate to this directory
-4. Run the example:
+## How to Run
+
+1. Install the .NET SDK for `net10.0`.
+2. Set the `GD_PUBLIC_KEY` and `GD_PRIVATE_KEY` environment variables to your license keys.
+3. Open this directory and run the example:
    ```bash
    dotnet run
    ```
 
-## Code Overview
+## Input Files
 
-The conversion logic in Program.fs demonstrates:
-- License setup from environment variables
-- Convert XLS to specific PDF format
-- Basic conversion workflow
-- File output
+- `cost-analysis.xls`
 
-## Requirements
+## Learn More
 
-- .NET 6.0 or later
-- GroupDocs.Conversion.LowCode package
-- Valid GroupDocs license keys (Optional)
-
-## Related Documentation
-
-For more information about document conversion, see the [GroupDocs.Conversion.LowCode documentation](https://docs.groupdocs.net/conversion/developer-guide/).
-
+- [Using XLS to PDF Converter](https://docs.groupdocs.net/conversion/developer-guide/using-xls-to-pdf-converter/) in the GroupDocs.Conversion.LowCode documentation
+- [GroupDocs.Conversion.LowCode](https://www.nuget.org/packages/GroupDocs.Conversion.LowCode) on NuGet
+- [Get a temporary license](https://purchase.groupdocs.net/temporary-license/)

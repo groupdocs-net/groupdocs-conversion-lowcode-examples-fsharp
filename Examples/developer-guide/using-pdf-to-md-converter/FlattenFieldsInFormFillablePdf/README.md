@@ -1,53 +1,47 @@
-﻿# Flatten Fields in Form Fillable PDF to Markdown
+# Flatten Fields in Form-Fillable PDF
 
-This example demonstrates how to convert pdf with flattened form fields to markdown using GroupDocs.Conversion.LowCode.
+The following example shows how to convert a form‑fillable PDF into static content by flattening form fields.
 
-## Overview
+## Code Example
 
-This console application shows how to convert pdf with flattened form fields to markdown.
+```fsharp
+open System
+open GroupDocs.Conversion.LowCode
 
-## Purpose
+[<EntryPoint>]
+let main _ =
+    // Load license keys
+    let publicKey = Environment.GetEnvironmentVariable("GD_PUBLIC_KEY")
+    let privateKey = Environment.GetEnvironmentVariable("GD_PRIVATE_KEY")
+    
+    // Apply license
+    License.Set(publicKey, privateKey)
 
-This example demonstrates the **flatten fields in form fillable pdf to markdown workflow**:
-- Convert PDF with flattened form fields to Markdown
-- Basic file input/output handling
-- Straightforward conversion process
+    // Flatten form fields through load options
+    let converter = new PdfToMdConverter("form-fields.pdf", fun options ->
+        options.FlattenAllFields <- true
+    )
+    
+    // Convert PDF to Markdown
+    converter.Convert("flattened.md")
+    0
+```
 
-## Files
+## How to Run
 
-### Input Files
-- `business-plan.docx` - Source document for conversion
-
-### Output Files
-- `business-plan.pdf` - Converted output document
-
-## Running the Example
-
-1. Ensure you have .NET 6.0 or later installed
-2. Set your GroupDocs license keys as environment variables:
-   - `GD_PUBLIC_KEY`
-   - `GD_PRIVATE_KEY`
-3. Navigate to this directory
-4. Run the example:
+1. Install the .NET SDK for `net10.0`.
+2. Set the `GD_PUBLIC_KEY` and `GD_PRIVATE_KEY` environment variables to your license keys.
+3. Open this directory and run the example:
    ```bash
    dotnet run
    ```
 
-## Code Overview
+## Input Files
 
-The conversion logic in Program.fs demonstrates:
-- License setup from environment variables
-- Convert PDF with flattened form fields to Markdown
-- Basic conversion workflow
-- File output
+- `form-fields.pdf`
 
-## Requirements
+## Learn More
 
-- .NET 6.0 or later
-- GroupDocs.Conversion.LowCode package
-- Valid GroupDocs license keys (Optional)
-
-## Related Documentation
-
-For more information about document conversion, see the [GroupDocs.Conversion.LowCode documentation](https://docs.groupdocs.net/conversion/developer-guide/).
-
+- [Using PDF to MD Converter](https://docs.groupdocs.net/conversion/developer-guide/using-pdf-to-md-converter/) in the GroupDocs.Conversion.LowCode documentation
+- [GroupDocs.Conversion.LowCode](https://www.nuget.org/packages/GroupDocs.Conversion.LowCode) on NuGet
+- [Get a temporary license](https://purchase.groupdocs.net/temporary-license/)

@@ -1,53 +1,45 @@
-﻿# DOC to PDF - Basic Example
+# Basic Example
 
-This example demonstrates how to perform a basic DOC to PDF conversion using GroupDocs.Conversion.LowCode.
+The following example shows the most common use case for converting DOC document to PDF. The source DOC file is loaded from a current folder. The converted file is saved to the same folder.
 
-## Overview
+## Code Example
 
-This console application shows how to create a DOC to PDF converter and perform a simple document conversion.
+```fsharp
+open System
+open GroupDocs.Conversion.LowCode
 
-## Purpose
+[<EntryPoint>]
+let main _ =
+    // Load license keys
+    let publicKey = Environment.GetEnvironmentVariable("GD_PUBLIC_KEY")
+    let privateKey = Environment.GetEnvironmentVariable("GD_PRIVATE_KEY")
 
-This example demonstrates the **basic DOC to PDF conversion workflow**:
-- Loading DOC documents using file path
-- Simple DOC to PDF conversion
-- Basic file input/output handling
-- Straightforward conversion process
+    // Apply the license
+    License.Set(publicKey, privateKey)
 
-## Files
+    // Create a converter from file path
+    let converter = new DocToPdfConverter("business-plan.doc")
 
-### Input Files
-- `business-plan.doc` - Source DOC document for conversion
+    // Convert DOC to PDF
+    converter.Convert("business-plan.pdf")
+    0
+```
 
-### Output Files
-- `business-plan.pdf` - Converted PDF output document
+## How to Run
 
-## Running the Example
-
-1. Ensure you have .NET 6.0 or later installed
-2. Set your GroupDocs license keys as environment variables:
-   - `GD_PUBLIC_KEY`
-   - `GD_PRIVATE_KEY`
-3. Navigate to this directory
-4. Run the example:
+1. Install the .NET SDK for `net10.0`.
+2. Set the `GD_PUBLIC_KEY` and `GD_PRIVATE_KEY` environment variables to your license keys.
+3. Open this directory and run the example:
    ```bash
    dotnet run
    ```
 
-## Code Overview
+## Input Files
 
-The conversion logic in `Program.fs` demonstrates:
-- License setup from environment variables
-- Document loading using file path: `new DocToPdfConverter("business-plan.doc")`
-- Basic conversion workflow
-- File output
+- `business-plan.doc`
 
-## Requirements
+## Learn More
 
-- .NET 6.0 or later
-- GroupDocs.Conversion.LowCode package
-- Valid GroupDocs license keys (Optional)
-
-## Related Documentation
-
-For more information about DOC to PDF conversion, see the [GroupDocs.Conversion.LowCode documentation](https://docs.groupdocs.net/conversion/developer-guide/). 
+- [Using DOC to PDF Converter](https://docs.groupdocs.net/conversion/developer-guide/using-doc-to-pdf-converter/) in the GroupDocs.Conversion.LowCode documentation
+- [GroupDocs.Conversion.LowCode](https://www.nuget.org/packages/GroupDocs.Conversion.LowCode) on NuGet
+- [Get a temporary license](https://purchase.groupdocs.net/temporary-license/)

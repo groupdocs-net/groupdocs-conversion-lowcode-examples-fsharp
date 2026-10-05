@@ -1,54 +1,51 @@
-﻿# Set Convert Options
+# Example 3: Set Convert Options
 
-This example demonstrates how to set convert options when saving converted documents using GroupDocs.Conversion.LowCode.
+You can use optional convert options to adjust the output according to your requirements. Each converter has its own corresponding convert options.
 
-## Overview
+The following code example shows how to set convert options to convert the first three pages of a DOCX document to a PDF file.
 
-This console application shows how to save converted documents with custom conversion options, specifically for converting specific pages.
+## Code Example
 
-## Purpose
+```fsharp
+open System
+open System.Collections.Generic
+open GroupDocs.Conversion.LowCode
 
-This example demonstrates the **convert options configuration**:
-- Setting specific pages for conversion
-- Customizing conversion behavior
-- Page range selection
-- Basic DOCX to PDF conversion workflow
+[<EntryPoint>]
+let main argv =
+    // Load license keys
+    let publicKey = Environment.GetEnvironmentVariable("GD_PUBLIC_KEY")
+    let privateKey = Environment.GetEnvironmentVariable("GD_PRIVATE_KEY")
 
-## Files
+    // Apply license
+    License.Set(publicKey, privateKey)
 
-### Input Files
-- `business-plan.docx` - Source document for conversion
+    // Create the converter
+    let converter = new DocxToPdfConverter("business-plan.docx")
 
-### Output Files
-- `pages-1-2-3.pdf` - Converted output document (first three pages only)
+    // Save first three pages to PDF
+    converter.Convert("pages-1-2-3.pdf", fun convertOptions ->
+        convertOptions.Pages <- List<int>([1; 2; 3])
+    )
 
-## Running the Example
+    0 // return exit code
+```
 
-1. Ensure you have .NET 6.0 or later installed
-2. Set your GroupDocs license keys as environment variables:
-   - `GD_PUBLIC_KEY`
-   - `GD_PRIVATE_KEY`
-3. Navigate to this directory
-4. Run the example:
+## How to Run
+
+1. Install the .NET SDK for `net10.0`.
+2. Set the `GD_PUBLIC_KEY` and `GD_PRIVATE_KEY` environment variables to your license keys.
+3. Open this directory and run the example:
    ```bash
    dotnet run
    ```
 
-## Code Overview
+## Input Files
 
-The conversion logic in `Program.fs` demonstrates:
-- License setup from environment variables
-- Document loading using file path: `new DocxToPdfConverter("business-plan.docx")`
-- Setting convert options: `converter.Convert("pages-1-2-3.pdf", fun convertOptions -> convertOptions.Pages <- List<int>([1; 2; 3]))`
-- Page range configuration
-- Basic conversion workflow
+- `business-plan.docx`
 
-## Requirements
+## Learn More
 
-- .NET 6.0 or later
-- GroupDocs.Conversion.LowCode package
-- Valid GroupDocs license keys (Optional)
-
-## Related Documentation
-
-For more information about saving converted documents, see the [GroupDocs.Conversion.LowCode documentation](https://docs.groupdocs.net/conversion/developer-guide/saving-converted-documents/). 
+- [Saving Converted Documents](https://docs.groupdocs.net/conversion/developer-guide/saving-converted-documents/) in the GroupDocs.Conversion.LowCode documentation
+- [GroupDocs.Conversion.LowCode](https://www.nuget.org/packages/GroupDocs.Conversion.LowCode) on NuGet
+- [Get a temporary license](https://purchase.groupdocs.net/temporary-license/)

@@ -1,53 +1,51 @@
-﻿# PDF to DOCX with A4 Page Size
+# Convert PDF to DOCX with A4 Page Size
 
-This example demonstrates how to convert pdf to docx with a4 page size using GroupDocs.Conversion.LowCode.
+You can specify the page size for the output DOCX file using the [SizeSettings](https://reference.groupdocs.net/conversion/GroupDocs.Conversion.Options.Convert/WordProcessingConvertOptions/SizeSettings/) property of the `WordProcessingConvertOptions` class, which takes a [PageSizeOptions](https://reference.groupdocs.net/conversion/GroupDocs.Conversion.Options/PageSizeOptions/) object.
 
-## Overview
+The following example shows how to convert a PDF file to DOCX with A4 page size:
 
-This console application shows how to convert pdf to docx with a4 page size.
+## Code Example
 
-## Purpose
+```fsharp
+open System
+open GroupDocs.Conversion.LowCode
+open GroupDocs.Conversion.Options
 
-This example demonstrates the **pdf to docx with a4 page size workflow**:
-- Convert PDF to DOCX with A4 page size
-- Basic file input/output handling
-- Straightforward conversion process
+[<EntryPoint>]
+let main argv =
+    // Load license keys
+    let publicKey = Environment.GetEnvironmentVariable("GD_PUBLIC_KEY")
+    let privateKey = Environment.GetEnvironmentVariable("GD_PRIVATE_KEY")
 
-## Files
+    // Apply license
+    License.Set(publicKey, privateKey)
 
-### Input Files
-- `business-plan.docx` - Source document for conversion
+    // Create the converter
+    let converter = new PdfToDocxConverter("business-plan.pdf")
 
-### Output Files
-- `business-plan.pdf` - Converted output document
+    // Convert to DOCX with A4 page size
+    converter.Convert("a4-size.docx", fun convertOptions ->
+        convertOptions.SizeSettings <- PageSizeOptions(PageSize = PageSize.A4)
+    )
 
-## Running the Example
+    0 // return exit code
+```
 
-1. Ensure you have .NET 6.0 or later installed
-2. Set your GroupDocs license keys as environment variables:
-   - `GD_PUBLIC_KEY`
-   - `GD_PRIVATE_KEY`
-3. Navigate to this directory
-4. Run the example:
+## How to Run
+
+1. Install the .NET SDK for `net10.0`.
+2. Set the `GD_PUBLIC_KEY` and `GD_PRIVATE_KEY` environment variables to your license keys.
+3. Open this directory and run the example:
    ```bash
    dotnet run
    ```
 
-## Code Overview
+## Input Files
 
-The conversion logic in Program.fs demonstrates:
-- License setup from environment variables
-- Convert PDF to DOCX with A4 page size
-- Basic conversion workflow
-- File output
+- `business-plan.pdf`
 
-## Requirements
+## Learn More
 
-- .NET 6.0 or later
-- GroupDocs.Conversion.LowCode package
-- Valid GroupDocs license keys (Optional)
-
-## Related Documentation
-
-For more information about document conversion, see the [GroupDocs.Conversion.LowCode documentation](https://docs.groupdocs.net/conversion/developer-guide/).
-
+- [Using PDF to DOCX Converter](https://docs.groupdocs.net/conversion/developer-guide/using-pdf-to-docx-converter/) in the GroupDocs.Conversion.LowCode documentation
+- [GroupDocs.Conversion.LowCode](https://www.nuget.org/packages/GroupDocs.Conversion.LowCode) on NuGet
+- [Get a temporary license](https://purchase.groupdocs.net/temporary-license/)

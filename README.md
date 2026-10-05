@@ -1,151 +1,165 @@
 # GroupDocs.Conversion.LowCode - F# Code Examples
 
-This repository contains **69+ complete, runnable examples** demonstrating various features of [GroupDocs.Conversion.LowCode](https://nuget.org/packages/GroupDocs.Conversion.LowCode) for F# (.NET 6.0+). These examples provide practical implementations for document conversion scenarios.
+This directory contains **69 complete, runnable F# examples** for [GroupDocs.Conversion.LowCode](https://www.nuget.org/packages/GroupDocs.Conversion.LowCode). They are generated from the documentation at https://docs.groupdocs.net/conversion/, so every example matches a code sample in the docs.
 
 ## 📋 Overview
 
-- **Package**: [GroupDocs.Conversion.LowCode](https://nuget.org/packages/GroupDocs.Conversion.LowCode)
-- **Language**: F# (.NET 6.0+)
-- **Docs**: https://docs.groupdocs.net/conversion/
+- **Package**: [GroupDocs.Conversion.LowCode](https://www.nuget.org/packages/GroupDocs.Conversion.LowCode) 26.9.0
+- **Language**: F# (`net10.0`)
+- **Documentation**: https://docs.groupdocs.net/conversion/
+- **API Reference**: https://reference.groupdocs.net/conversion/
 
 ## 📁 Directory Structure
 
-The examples are organized to mirror the official documentation structure:
+The examples mirror the structure of the documentation:
 
 ```
-groupdocs-conversion-lowcode-examples-fsharp/
+/
 ├── 📂 Examples/
-│   ├── 📂 developer-guide/
-│   │   ├── 📂 CopyTheCodeExample/
-│   │   ├── 📂 loading-source-documents/
-│   │   │   ├── 📂 LoadFromFilePath/
-│   │   │   ├── 📂 LoadFromStream/
-│   │   │   └── 📂 SetLoadOptions/
-│   │   ├── 📂 saving-converted-documents/
-│   │   │   ├── 📂 SaveToFilePath/
-│   │   │   ├── 📂 SaveToStream/
-│   │   │   └── 📂 SetConvertOptions/
-│   │   ├── 📂 using-doc-to-pdf-converter/
-│   │   │   ├── 📂 BasicExample/
-│   │   │   ├── 📂 DocToPasswordProtectedPdf/
-│   │   │   ├── 📂 DocToPdfaFormat/
-│   │   │   ├── 📂 DocWithCommentsToPdfWithoutComments/
-│   │   │   ├── 📂 DocWithTrackedChangesToPdf/
-│   │   │   ├── 📂 ProtectedDocToPdf/
-│   │   │   └── 📂 SpecificDocPagesToPdf/
-│   │   ├── 📂 using-docx-to-pdf-converter/
-│   │   │   ├── 📂 BasicExample/
-│   │   │   ├── 📂 DocxToPasswordProtectedPdf/
-│   │   │   ├── 📂 DocxWithCommentsToPdfWithoutComments/
-│   │   │   ├── 📂 DocxWithTrackedChangesToPdf/
-│   │   │   ├── 📂 ProtectedDocxToPdf/
-│   │   │   └── 📂 SpecificDocxPagesToPdf/
-│   │   ├── 📂 using-html-to-pdf-converter/
-│   │   │   ├── 📂 BasicExample/
-│   │   │   ├── 📂 HtmlToPasswordProtectedPdf/
-│   │   │   ├── 📂 HtmlToPdfWithSpecificPdfFormat/
-│   │   │   ├── 📂 HtmlWithCustomCssStyling/
-│   │   │   ├── 📂 HtmlWithZoomLevel/
-│   │   │   └── 📂 SkipExternalResourcesReferencedInHtml/
-│   │   ├── 📂 using-pdf-to-docx-converter/
-│   │   │   ├── 📂 BasicExample/
-│   │   │   ├── 📂 FlattenFieldsInFormFillablePdf/
-│   │   │   ├── 📂 PdfToDocxWithA4PageSize/
-│   │   │   ├── 📂 PdfToPasswordProtectedDocx/
-│   │   │   ├── 📂 PdfWithAnnotationsToDocxWithoutAnnotations/
-│   │   │   └── 📂 ProtectedPdfToDocx/
-│   │   ├── 📂 using-pdf-to-md-converter/
-│   │   │   ├── 📂 BasicExample/
-│   │   │   ├── 📂 FlattenFieldsInFormFillablePdf/
-│   │   │   ├── 📂 PdfWithAnnotationsToMarkdownWithoutAnnotations/
-│   │   │   ├── 📂 ProtectedPdfToMarkdown/
-│   │   │   └── 📂 SkipImagesWhenConvertingPdfToMarkdown/
-│   │   ├── 📂 using-pdf-to-pdfa-converter/
-│   │   │   ├── 📂 BasicExample/
-│   │   │   ├── 📂 FlattenFieldsInFormFillablePdf/
-│   │   │   ├── 📂 PdfToPasswordProtectedPdfa/
-│   │   │   ├── 📂 PdfWithAnnotationsToPdfaWithoutAnnotations/
-│   │   │   ├── 📂 ProtectedPdfToPdfa/
-│   │   │   └── 📂 SpecificPdfPagesToPdfa/
-│   │   ├── 📂 using-ppt-to-pdf-converter/
-│   │   │   ├── 📂 BasicExample/
-│   │   │   ├── 📂 PptToPasswordProtectedPdf/
-│   │   │   ├── 📂 PptWithHiddenSlides/
-│   │   │   ├── 📂 PptWithPreservedDocumentStructureForAccessiblePdf/
-│   │   │   ├── 📂 ProtectedPptToPdf/
-│   │   │   └── 📂 SpecificPptSlidesToPdf/
-│   │   ├── 📂 using-pptx-to-pdf-converter/
-│   │   │   ├── 📂 BasicExample/
-│   │   │   ├── 📂 PptxToPasswordProtectedPdf/
-│   │   │   ├── 📂 PptxWithHiddenSlides/
-│   │   │   ├── 📂 PreserveDocumentStructureForAccessiblePdf/
-│   │   │   ├── 📂 ProtectedPptxToPdf/
-│   │   │   └── 📂 SpecificPptxSlidesToPdf/
-│   │   ├── 📂 using-xls-to-pdf-converter/
-│   │   │   ├── 📂 BasicExample/
-│   │   │   ├── 📂 ProtectedXlsToPdf/
-│   │   │   ├── 📂 SpecificSheetsFromXlsToPdf/
-│   │   │   ├── 📂 XlsToPasswordProtectedPdf/
-│   │   │   ├── 📂 XlsToPdfWithSpecificPdfFormat/
-│   │   │   └── 📂 XlsWithHiddenSheets/
-│   │   └── 📂 using-xlsx-to-pdf-converter/
-│   │       ├── 📂 BasicExample/
-│   │       ├── 📂 ProtectedXlsxToPdf/
-│   │       ├── 📂 SpecificSheetsFromXlsxToPdf/
-│   │       ├── 📂 XlsxToPasswordProtectedPdf/
-│   │       ├── 📂 XlsxToPdfWithSpecificPdfFormat/
-│   │       └── 📂 XlsxWithHiddenSheetsToPdf/
-│   └── 📂 licensing/
-│       ├── 📂 SetLicenseFromFile/
-│       └── 📂 SetLicenseKeys/
-├── 📄 GroupDocs.Conversion.LowCode.Examples.sln
-├── 📄 LICENSE
+│   ├── 📂 developer-guide/ (1 examples)
+│   ├── 📂 developer-guide/loading-source-documents/ (3 examples)
+│   ├── 📂 developer-guide/saving-converted-documents/ (3 examples)
+│   ├── 📂 developer-guide/using-doc-to-pdf-converter/ (7 examples)
+│   ├── 📂 developer-guide/using-docx-to-pdf-converter/ (6 examples)
+│   ├── 📂 developer-guide/using-html-to-pdf-converter/ (6 examples)
+│   ├── 📂 developer-guide/using-pdf-to-docx-converter/ (6 examples)
+│   ├── 📂 developer-guide/using-pdf-to-md-converter/ (5 examples)
+│   ├── 📂 developer-guide/using-pdf-to-pdfa-converter/ (6 examples)
+│   ├── 📂 developer-guide/using-ppt-to-pdf-converter/ (6 examples)
+│   ├── 📂 developer-guide/using-pptx-to-pdf-converter/ (6 examples)
+│   ├── 📂 developer-guide/using-xls-to-pdf-converter/ (6 examples)
+│   ├── 📂 developer-guide/using-xlsx-to-pdf-converter/ (6 examples)
+│   └── 📂 licensing/ (2 examples)
 ├── 📄 README.md
 ├── 🚀 run_all_examples.bat
 ├── 🚀 run_all_examples.ps1
 └── 🚀 run_all_examples.sh
 ```
 
-## 🎯 Example Categories
+## 🎯 Examples
 
-### **Licensing**
-- **Set License Keys**: Programmatic license setup using keys
-- **Set License From File**: License setup using license file
+### Developer Guide
 
-### **Developer Guide**
+- [CopyTheCodeExample](Examples/developer-guide/CopyTheCodeExample/)
 
-#### **Document Loading**
-- **Load From FilePath**: Load documents using file paths
-- **Load From Stream**: Load documents using file streams
-- **Set Load Options**: Configure document loading options
+### Loading Source Documents
 
-#### **Document Saving**
-- **Save To FilePath**: Save converted documents to file paths
-- **Save To Stream**: Save converted documents to streams
-- **Set Convert Options**: Configure conversion options
+- [LoadFromFilePath](Examples/developer-guide/loading-source-documents/LoadFromFilePath/)
+- [LoadFromStream](Examples/developer-guide/loading-source-documents/LoadFromStream/)
+- [SetLoadOptions](Examples/developer-guide/loading-source-documents/SetLoadOptions/)
 
-#### **Document Converters**
-- **DOC to PDF**: Convert legacy Word documents to PDF
-- **DOCX to PDF**: Convert modern Word documents to PDF
-- **HTML to PDF**: Convert HTML files to PDF
-- **PDF to DOCX**: Convert PDF to Word documents
-- **PDF to Markdown**: Convert PDF to Markdown format
-- **PDF to PDF/A**: Convert PDF to archival format
-- **PPT to PDF**: Convert PowerPoint presentations to PDF
-- **PPTX to PDF**: Convert modern PowerPoint presentations to PDF
-- **XLS to PDF**: Convert legacy Excel spreadsheets to PDF
-- **XLSX to PDF**: Convert modern Excel spreadsheets to PDF
+### Saving Converted Documents
+
+- [SaveToFilePath](Examples/developer-guide/saving-converted-documents/SaveToFilePath/)
+- [SaveToStream](Examples/developer-guide/saving-converted-documents/SaveToStream/)
+- [SetConvertOptions](Examples/developer-guide/saving-converted-documents/SetConvertOptions/)
+
+### Using DOC to PDF Converter
+
+- [BasicExample](Examples/developer-guide/using-doc-to-pdf-converter/BasicExample/)
+- [ProtectedDocToPdf](Examples/developer-guide/using-doc-to-pdf-converter/ProtectedDocToPdf/)
+- [DocWithTrackedChangesToPdf](Examples/developer-guide/using-doc-to-pdf-converter/DocWithTrackedChangesToPdf/)
+- [DocWithCommentsToPdfWithoutComments](Examples/developer-guide/using-doc-to-pdf-converter/DocWithCommentsToPdfWithoutComments/)
+- [SpecificDocPagesToPdf](Examples/developer-guide/using-doc-to-pdf-converter/SpecificDocPagesToPdf/)
+- [DocToPasswordProtectedPdf](Examples/developer-guide/using-doc-to-pdf-converter/DocToPasswordProtectedPdf/)
+- [DocToPdfaFormat](Examples/developer-guide/using-doc-to-pdf-converter/DocToPdfaFormat/)
+
+### Using DOCX to PDF Converter
+
+- [BasicExample](Examples/developer-guide/using-docx-to-pdf-converter/BasicExample/)
+- [ProtectedDocxToPdf](Examples/developer-guide/using-docx-to-pdf-converter/ProtectedDocxToPdf/)
+- [DocxWithTrackedChangesToPdf](Examples/developer-guide/using-docx-to-pdf-converter/DocxWithTrackedChangesToPdf/)
+- [DocxWithCommentsToPdfWithoutComments](Examples/developer-guide/using-docx-to-pdf-converter/DocxWithCommentsToPdfWithoutComments/)
+- [SpecificDocxPagesToPdf](Examples/developer-guide/using-docx-to-pdf-converter/SpecificDocxPagesToPdf/)
+- [DocxToPasswordProtectedPdf](Examples/developer-guide/using-docx-to-pdf-converter/DocxToPasswordProtectedPdf/)
+
+### Using HTML to PDF Converter
+
+- [BasicExample](Examples/developer-guide/using-html-to-pdf-converter/BasicExample/)
+- [HtmlWithCustomCssStyling](Examples/developer-guide/using-html-to-pdf-converter/HtmlWithCustomCssStyling/)
+- [HtmlWithZoomLevel](Examples/developer-guide/using-html-to-pdf-converter/HtmlWithZoomLevel/)
+- [SkipExternalResourcesReferencedInHtml](Examples/developer-guide/using-html-to-pdf-converter/SkipExternalResourcesReferencedInHtml/)
+- [HtmlToPdfWithSpecificPdfFormat](Examples/developer-guide/using-html-to-pdf-converter/HtmlToPdfWithSpecificPdfFormat/)
+- [HtmlToPasswordProtectedPdf](Examples/developer-guide/using-html-to-pdf-converter/HtmlToPasswordProtectedPdf/)
+
+### Using PDF to DOCX Converter
+
+- [BasicExample](Examples/developer-guide/using-pdf-to-docx-converter/BasicExample/)
+- [ProtectedPdfToDocx](Examples/developer-guide/using-pdf-to-docx-converter/ProtectedPdfToDocx/)
+- [FlattenFieldsInFormFillablePdf](Examples/developer-guide/using-pdf-to-docx-converter/FlattenFieldsInFormFillablePdf/)
+- [PdfWithAnnotationsToDocxWithoutAnnotations](Examples/developer-guide/using-pdf-to-docx-converter/PdfWithAnnotationsToDocxWithoutAnnotations/)
+- [PdfToPasswordProtectedDocx](Examples/developer-guide/using-pdf-to-docx-converter/PdfToPasswordProtectedDocx/)
+- [PdfToDocxWithA4PageSize](Examples/developer-guide/using-pdf-to-docx-converter/PdfToDocxWithA4PageSize/)
+
+### Using PDF to MD Converter
+
+- [BasicExample](Examples/developer-guide/using-pdf-to-md-converter/BasicExample/)
+- [ProtectedPdfToMarkdown](Examples/developer-guide/using-pdf-to-md-converter/ProtectedPdfToMarkdown/)
+- [FlattenFieldsInFormFillablePdf](Examples/developer-guide/using-pdf-to-md-converter/FlattenFieldsInFormFillablePdf/)
+- [PdfWithAnnotationsToMarkdownWithoutAnnotations](Examples/developer-guide/using-pdf-to-md-converter/PdfWithAnnotationsToMarkdownWithoutAnnotations/)
+- [SkipImagesWhenConvertingPdfToMarkdown](Examples/developer-guide/using-pdf-to-md-converter/SkipImagesWhenConvertingPdfToMarkdown/)
+
+### Using PDF to PDF/A Converter
+
+- [BasicExample](Examples/developer-guide/using-pdf-to-pdfa-converter/BasicExample/)
+- [ProtectedPdfToPdfa](Examples/developer-guide/using-pdf-to-pdfa-converter/ProtectedPdfToPdfa/)
+- [FlattenFieldsInFormFillablePdf](Examples/developer-guide/using-pdf-to-pdfa-converter/FlattenFieldsInFormFillablePdf/)
+- [PdfWithAnnotationsToPdfaWithoutAnnotations](Examples/developer-guide/using-pdf-to-pdfa-converter/PdfWithAnnotationsToPdfaWithoutAnnotations/)
+- [SpecificPdfPagesToPdfa](Examples/developer-guide/using-pdf-to-pdfa-converter/SpecificPdfPagesToPdfa/)
+- [PdfToPasswordProtectedPdfa](Examples/developer-guide/using-pdf-to-pdfa-converter/PdfToPasswordProtectedPdfa/)
+
+### Using PPT to PDF Converter
+
+- [BasicExample](Examples/developer-guide/using-ppt-to-pdf-converter/BasicExample/)
+- [ProtectedPptToPdf](Examples/developer-guide/using-ppt-to-pdf-converter/ProtectedPptToPdf/)
+- [PptWithHiddenSlides](Examples/developer-guide/using-ppt-to-pdf-converter/PptWithHiddenSlides/)
+- [PptWithPreservedDocumentStructureForAccessiblePdf](Examples/developer-guide/using-ppt-to-pdf-converter/PptWithPreservedDocumentStructureForAccessiblePdf/)
+- [SpecificPptSlidesToPdf](Examples/developer-guide/using-ppt-to-pdf-converter/SpecificPptSlidesToPdf/)
+- [PptToPasswordProtectedPdf](Examples/developer-guide/using-ppt-to-pdf-converter/PptToPasswordProtectedPdf/)
+
+### Using PPTX to PDF Converter
+
+- [BasicExample](Examples/developer-guide/using-pptx-to-pdf-converter/BasicExample/)
+- [ProtectedPptxToPdf](Examples/developer-guide/using-pptx-to-pdf-converter/ProtectedPptxToPdf/)
+- [PptxWithHiddenSlides](Examples/developer-guide/using-pptx-to-pdf-converter/PptxWithHiddenSlides/)
+- [PreserveDocumentStructureForAccessiblePdf](Examples/developer-guide/using-pptx-to-pdf-converter/PreserveDocumentStructureForAccessiblePdf/)
+- [SpecificPptxSlidesToPdf](Examples/developer-guide/using-pptx-to-pdf-converter/SpecificPptxSlidesToPdf/)
+- [PptxToPasswordProtectedPdf](Examples/developer-guide/using-pptx-to-pdf-converter/PptxToPasswordProtectedPdf/)
+
+### Using XLS to PDF Converter
+
+- [BasicExample](Examples/developer-guide/using-xls-to-pdf-converter/BasicExample/)
+- [ProtectedXlsToPdf](Examples/developer-guide/using-xls-to-pdf-converter/ProtectedXlsToPdf/)
+- [SpecificSheetsFromXlsToPdf](Examples/developer-guide/using-xls-to-pdf-converter/SpecificSheetsFromXlsToPdf/)
+- [XlsWithHiddenSheets](Examples/developer-guide/using-xls-to-pdf-converter/XlsWithHiddenSheets/)
+- [XlsToPdfWithSpecificPdfFormat](Examples/developer-guide/using-xls-to-pdf-converter/XlsToPdfWithSpecificPdfFormat/)
+- [XlsToPasswordProtectedPdf](Examples/developer-guide/using-xls-to-pdf-converter/XlsToPasswordProtectedPdf/)
+
+### Using XLSX to PDF Converter
+
+- [BasicExample](Examples/developer-guide/using-xlsx-to-pdf-converter/BasicExample/)
+- [ProtectedXlsxToPdf](Examples/developer-guide/using-xlsx-to-pdf-converter/ProtectedXlsxToPdf/)
+- [SpecificSheetsFromXlsxToPdf](Examples/developer-guide/using-xlsx-to-pdf-converter/SpecificSheetsFromXlsxToPdf/)
+- [XlsxWithHiddenSheetsToPdf](Examples/developer-guide/using-xlsx-to-pdf-converter/XlsxWithHiddenSheetsToPdf/)
+- [XlsxToPdfWithSpecificPdfFormat](Examples/developer-guide/using-xlsx-to-pdf-converter/XlsxToPdfWithSpecificPdfFormat/)
+- [XlsxToPasswordProtectedPdf](Examples/developer-guide/using-xlsx-to-pdf-converter/XlsxToPasswordProtectedPdf/)
+
+### Licensing
+
+- [SetLicenseKeys](Examples/licensing/SetLicenseKeys/)
+- [SetLicenseFromFile](Examples/licensing/SetLicenseFromFile/)
 
 ## 🚀 How to Run Code Examples
 
-### **Prerequisites**
-- **.NET 6.0 or later** installed on your system
-- **Valid GroupDocs license** (trial or commercial)
-- **Sample files** (automatically included with examples)
+### Prerequisites
 
-### **Setup License**
+- **.NET SDK** that supports `net10.0`
+- **GroupDocs.Conversion.LowCode license keys**: the examples read them from the `GD_PUBLIC_KEY` and `GD_PRIVATE_KEY` environment variables and stop with an error when they are not set. A [temporary license](https://purchase.groupdocs.net/temporary-license/) works too.
+- **Sample files** (copied into each example folder)
 
-#### **Option 1: Environment Variables (Recommended)**
+### Set Up the License
+
+#### Option 1: Environment Variables (Recommended)
 
 ```bash
 # Windows
@@ -157,66 +171,37 @@ export GD_PUBLIC_KEY=your-public-key
 export GD_PRIVATE_KEY=your-private-key
 ```
 
-#### **Option 2: Direct in Code**
+#### Option 2: Direct in Code
 
-Edit the `Program.fs` file and replace placeholder values:
+Edit the `Program.fs` file and replace the placeholder values:
+
 ```fsharp
 let publicKey = "your-public-key"
 let privateKey = "your-private-key"
 ```
 
-> **Note:** Learn more about licensing at https://docs.groupdocs.net/conversion/licensing/.
+### Running Individual Examples
 
-### **Running Individual Examples**
-
-1. **Navigate to any example directory:**
+1. Navigate to an example directory:
    ```bash
-   cd Examples/developer-guide/using-docx-to-pdf-converter/BasicExample
+   cd Examples/developer-guide/CopyTheCodeExample
    ```
-
-2. **Restore dependencies (first time only):**
-   ```bash
-   dotnet restore
-   ```
-
-3. **Run the example:**
+2. Run the example:
    ```bash
    dotnet run
    ```
+3. Look for the generated files in the example directory.
 
-4. **Check the output:**
-   - Look for generated files in the example directory (or an `output` subfolder, if present)
-   - Check console output for any errors or success messages
+### Running All Examples
 
-### **Running All Examples**
+- **Windows (Command Prompt)**: `run_all_examples.bat`
+- **Windows (PowerShell)**: `.\run_all_examples.ps1`
+- **Linux/macOS**: `./run_all_examples.sh`
 
-Use the provided scripts to run all examples sequentially:
-
-#### **Windows (Command Prompt)**
-```bash
-run_all_examples.bat
-```
-
-#### **Windows (PowerShell)**
-```powershell
-./run_all_examples.ps1
-```
-
-#### **Linux/macOS**
-```bash
-./run_all_examples.sh
-```
-
-## 📝 Notes
-
-- Examples are generated automatically from documentation
-- Some examples may require specific sample files to be present
-- Make sure to handle any exceptions that may occur during conversion
-- Check the individual README files in each example directory for specific details
+The scripts read the license keys from the environment variables. They skip the 2 examples that load a license file or keys from `Program.fs`; put your license into those files and run them individually.
 
 ## 🆘 Support
 
-For issues with the examples or GroupDocs.Conversion.LowCode, please refer to:
 - [Documentation](https://docs.groupdocs.net/conversion/)
 - [API Reference](https://reference.groupdocs.net/conversion/)
-- [Free Suport Forum](https://forum.groupdocs.net/)
+- [Free Support Forum](https://forum.groupdocs.net/)
